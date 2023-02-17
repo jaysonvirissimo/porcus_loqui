@@ -18,8 +18,11 @@ module PorcusLoqui
     if CONSONENT_CLUSTERS.member?(potential_cluster.downcase)
       characters.rotate! until VOWELS.member?(characters.first)
       "#{characters.join("")}ay"
+    elsif CONSONENTS.member?(characters.first)
+      characters.rotate! until VOWELS.member?(characters.first)
+      "#{characters.join("")}ay"
     else
-      word
+      "#{word}way"
     end
   end
 
