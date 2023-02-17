@@ -33,9 +33,13 @@ RSpec.describe PorcusLoqui do
     end
 
     context "when it starts with a consonent (not in a cluster)" do
+      specify do
+        expect(described_class["school"]).to eq("oolschay")
+      end
     end
 
     context "when it starts with a vowel" do
+
     end
   end
 end
