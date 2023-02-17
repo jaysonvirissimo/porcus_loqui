@@ -14,12 +14,12 @@ module PorcusLoqui
 
   def self.translate(word)
     characters = word.chars
-    potential_cluster = characters.take(2).join
-    if CONSONENT_CLUSTERS.member?(potential_cluster.downcase)
-      characters.rotate! until VOWELS.member?(characters.first)
+
+    if CONSONENTS.member?(characters[0]) && VOWELS.member?(characters[1])
+      characters.rotate!
       "#{characters.join("")}ay"
-    elsif CONSONENTS.member?(characters.first)
-      characters.rotate! until VOWELS.member?(characters.first)
+    elsif CONSONENTS.member?(characters[0]) && CONSONENTS.member?(characters[1])
+      2.times { characters.rotate! }
       "#{characters.join("")}ay"
     else
       "#{word}way"
@@ -28,7 +28,6 @@ module PorcusLoqui
 
   private
 
-  VOWELS = %w(A E I O U a e i o u).to_set.freeze
-  CONSONENT_CLUSTERS = %w(bl br ch ck cl cr dr fl fr gh gl gr ng ph pl pr qu sc sh sk sl sm sn sp st sw th tr tw wh wr).to_set.freeze
+  VOWELS = %w[A E I O U a e i o u].to_set.freeze
   CONSONENTS = ((("A".."Z").to_a + ("a".."z").to_a).to_set - VOWELS).freeze
 end
